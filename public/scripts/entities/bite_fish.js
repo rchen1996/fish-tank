@@ -22,8 +22,14 @@ class BiteFish extends Fish {
   eat(shouldEat) {
     for (let fish of shouldEat) {
       // eat other fish, but not other BiteFish
-      if (fish.isTasty) {
-        fish.kill();
+      // cannot eat sharks
+      // if eats pufferfish, bitefish dies
+      if (fish instanceof Fish) {
+        if(fish.isToxic) {
+          this.kill();
+        } else if (fish.isTasty) {
+          fish.kill();
+        }
       }
     }
   }
