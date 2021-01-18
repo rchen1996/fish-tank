@@ -7,17 +7,15 @@ class Shark extends BiteFish {
 
   updateOneTick() {
     super.updateOneTick();
-    let shouldEat = this.tank.getProximateDenizens(this.position, 50);
-    if (shouldEat.length > 0) {
-      this.eat(shouldEat);
-    }
   }
 
   eat(shouldEat) {
     for (let fish of shouldEat) {
       // eats ONLY bitefish & cannot be eaten by bitefish
-      if (fish !== this && !fish.isTasty) {
-        fish.kill();
+      if (fish instanceof Fish) {
+        if (!fish instanceof BiteFish && !fish.isTasty) {
+          fish.kill();
+        }
       }
     }
   }
